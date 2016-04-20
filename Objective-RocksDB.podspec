@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.7"
 
   s.source       = { :git => "git@github.com:huang1988519/Objective-RocksDB.git", :tag => "0.5.0" }
-  s.source_files  = 'ObjectiveRocks/*.{h,mm,m}'
+  s.source_files  = "ObjectiveRocks/*.{h,mm,m}"
   s.requires_arc = false
 
 
