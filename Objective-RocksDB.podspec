@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "git@github.com:huang1988519/Objective-RocksDB.git", :tag => "0.0.1" }
+  s.source       = { :git => "git@github.com:huang1988519/Objective-RocksDB.git", :tag => "0.5.0" }
 
 
   s.source_files  = "Classes", "Classes/**/*.{h,m}"
