@@ -18,9 +18,10 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "5.0"
   s.osx.deployment_target = "10.7"
 
-  s.source       = { :git => "git@github.com:huang1988519/Objective-RocksDB.git", :tag => "0.0.1" }
+  s.source       = { :git => "git@github.com:huang1988519/Objective-RocksDB.git", :tag => "0.5.0" }
   s.source_files  = 'ObjectiveRocks/*.{h,mm,m}'
   s.requires_arc = false
+
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "RockesDB", :git => 'git@github.com:facebook/rocksdb.git'
