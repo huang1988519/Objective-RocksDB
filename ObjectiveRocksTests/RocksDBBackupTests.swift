@@ -21,7 +21,10 @@ class RocksDBBackupTests : RocksDBTests {
 
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.close()
 
@@ -40,7 +43,10 @@ class RocksDBBackupTests : RocksDBTests {
 
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.close()
 
@@ -62,13 +68,22 @@ class RocksDBBackupTests : RocksDBTests {
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
 		rocks.setData(Data("value 1"), forKey: Data("key 1"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 2"), forKey: Data("key 2"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 3"), forKey: Data("key 3"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.close()
 
@@ -90,17 +105,29 @@ class RocksDBBackupTests : RocksDBTests {
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
 		rocks.setData(Data("value 1"), forKey: Data("key 1"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 2"), forKey: Data("key 2"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 3"), forKey: Data("key 3"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.close()
 
-		backupEngine.purgeOldBackupsKeepingLast(2, error: nil)
+		do {
+			try backupEngine.purgeOldBackupsKeepingLast(2)
+		} catch _ {
+		}
 
 		let backupInfo = backupEngine.backupInfo()
 
@@ -119,17 +146,29 @@ class RocksDBBackupTests : RocksDBTests {
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
 		rocks.setData(Data("value 1"), forKey: Data("key 1"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 2"), forKey: Data("key 2"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 3"), forKey: Data("key 3"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.close()
 
-		backupEngine.deleteBackupWithId(2, error: nil)
+		do {
+			try backupEngine.deleteBackupWithId(2)
+		} catch _ {
+		}
 
 		let backupInfo = backupEngine.backupInfo()
 
@@ -151,7 +190,10 @@ class RocksDBBackupTests : RocksDBTests {
 
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 10"), forKey: Data("key 1"))
 		rocks.setData(Data("value 20"), forKey: Data("key 2"))
@@ -159,7 +201,10 @@ class RocksDBBackupTests : RocksDBTests {
 
 		rocks.close()
 
-		backupEngine.restoreBackupToDestinationPath(self.restorePath, error: nil)
+		do {
+			try backupEngine.restoreBackupToDestinationPath(self.restorePath)
+		} catch _ {
+		}
 
 		let backupRocks = RocksDB(path: restorePath)
 
@@ -178,17 +223,29 @@ class RocksDBBackupTests : RocksDBTests {
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
 		rocks.setData(Data("value 1"), forKey: Data("key 1"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 2"), forKey: Data("key 2"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 3"), forKey: Data("key 3"))
-		backupEngine.createBackupForDatabase(rocks, error: nil)
+		do {
+			try backupEngine.createBackupForDatabase(rocks)
+		} catch _ {
+		}
 
 		rocks.close()
 
-		backupEngine.restoreBackupWithId(1, toDestinationPath: self.restorePath, error: nil)
+		do {
+			try backupEngine.restoreBackupWithId(1, toDestinationPath: self.restorePath)
+		} catch _ {
+		}
 
 		var backupRocks = RocksDB(path: restorePath)
 
@@ -198,7 +255,10 @@ class RocksDBBackupTests : RocksDBTests {
 
 		backupRocks.close()
 
-		backupEngine.restoreBackupWithId(2, toDestinationPath: self.restorePath, error: nil)
+		do {
+			try backupEngine.restoreBackupWithId(2, toDestinationPath: self.restorePath)
+		} catch _ {
+		}
 
 		backupRocks = RocksDB(path: restorePath)
 

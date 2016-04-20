@@ -52,7 +52,7 @@ class RocksDBTests : XCTestCase {
 	override func setUp() {
 		super.setUp()
 		let bundle = NSBundle(forClass: self.dynamicType)
-		path = bundle.bundlePath.stringByAppendingPathComponent("ObjectiveRocks")
+		path = (bundle.bundlePath as NSString).stringByAppendingPathComponent("ObjectiveRocks")
 		backupPath = path.stringByAppendingString("Backup")
 		restorePath = path.stringByAppendingString("Restore")
 		checkpointPath1 = path.stringByAppendingString("Snapshot1")
@@ -70,10 +70,25 @@ class RocksDBTests : XCTestCase {
 	}
 
 	func cleanupDatabase() {
-		NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
-		NSFileManager.defaultManager().removeItemAtPath(backupPath, error: nil)
-		NSFileManager.defaultManager().removeItemAtPath(restorePath, error: nil)
-		NSFileManager.defaultManager().removeItemAtPath(checkpointPath1, error: nil)
-		NSFileManager.defaultManager().removeItemAtPath(checkpointPath2, error: nil)
+		do {
+			try NSFileManager.defaultManager().removeItemAtPath(path)
+		} catch _ {
+		}
+		do {
+			try NSFileManager.defaultManager().removeItemAtPath(backupPath)
+		} catch _ {
+		}
+		do {
+			try NSFileManager.defaultManager().removeItemAtPath(restorePath)
+		} catch _ {
+		}
+		do {
+			try NSFileManager.defaultManager().removeItemAtPath(checkpointPath1)
+		} catch _ {
+		}
+		do {
+			try NSFileManager.defaultManager().removeItemAtPath(checkpointPath2)
+		} catch _ {
+		}
 	}
 }

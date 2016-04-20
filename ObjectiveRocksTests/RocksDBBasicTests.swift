@@ -46,7 +46,14 @@ class RocksDBBasicTests : RocksDBTests {
 		XCTAssertNil(rocks.dataForKey(Data("key 2")));
 
 		var error: NSError? = nil
-		var ok = rocks.deleteDataForKey(Data("key 2"), error:&error);
+		var ok: Bool
+		do {
+			try rocks.deleteDataForKey(Data("key 2"))
+			ok = true
+		} catch let error1 as NSError {
+			error = error1
+			ok = false
+		};
 		XCTAssertTrue(ok);
 		XCTAssertNil(error);
 	}
@@ -77,7 +84,14 @@ class RocksDBBasicTests : RocksDBTests {
 		XCTAssertNil(rocks.objectForKey("key 2"));
 
 		var error: NSError? = nil
-		var ok = rocks.deleteObjectForKey("key 2", error:&error);
+		var ok: Bool
+		do {
+			try rocks.deleteObjectForKey("key 2")
+			ok = true
+		} catch let error1 as NSError {
+			error = error1
+			ok = false
+		};
 		XCTAssertTrue(ok);
 		XCTAssertNil(error);
 	}

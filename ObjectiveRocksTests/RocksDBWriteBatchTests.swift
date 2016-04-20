@@ -78,7 +78,10 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		batch.setData(Data("value 2"), forKey: Data("key 2"))
 		batch.setData(Data("value 3"), forKey: Data("key 3"))
 
-		rocks.applyWriteBatch(batch, error: nil, writeOptions: nil)
+		do {
+			try rocks.applyWriteBatch(batch, writeOptions: nil)
+		} catch _ {
+		}
 
 		XCTAssertEqual(rocks.dataForKey(Data("key 1")), Data("value 1"));
 		XCTAssertEqual(rocks.dataForKey(Data("key 2")), Data("value 2"));
@@ -99,7 +102,10 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		batch.setData(Data("value 2"), forKey: Data("key 2"))
 		batch.setData(Data("value 3"), forKey: Data("key 3"))
 
-		rocks.applyWriteBatch(batch, error: nil, writeOptions: nil)
+		do {
+			try rocks.applyWriteBatch(batch, writeOptions: nil)
+		} catch _ {
+		}
 
 		XCTAssertNil(rocks.dataForKey(Data("Key 1")))
 		XCTAssertEqual(rocks.dataForKey(Data("key 2")), Data("value 2"));
@@ -111,7 +117,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		rocks = RocksDB(path: self.path, andDBOptions: { (options) -> Void in
 			options.createIfMissing = true
 			options.mergeOperator = RocksDBMergeOperator(name: "merge", andBlock: { (key, existing, value) -> AnyObject! in
-				var result: NSMutableString = ""
+				let result: NSMutableString = ""
 				if let existingValue = existing as? NSData {
 					result.setString(Str(existingValue) as String)
 				}
@@ -130,7 +136,10 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		batch.setData(Data("value 3"), forKey: Data("key 3"))
 		batch.mergeData(Data("value 2 new"), forKey: Data("key 2"))
 
-		rocks.applyWriteBatch(batch, error: nil, writeOptions: nil)
+		do {
+			try rocks.applyWriteBatch(batch, writeOptions: nil)
+		} catch _ {
+		}
 
 		XCTAssertEqual(rocks.dataForKey(Data("key 2")), Data("value 2,value 2 new"));
 	}
@@ -150,7 +159,10 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		batch.clear()
 		batch.setData(Data("value 4"), forKey: Data("key 4"))
 
-		rocks.applyWriteBatch(batch, error: nil, writeOptions: nil)
+		do {
+			try rocks.applyWriteBatch(batch, writeOptions: nil)
+		} catch _ {
+		}
 
 		XCTAssertEqual(rocks.dataForKey(Data("key 1")), Data("value 1"));
 		XCTAssertNil(rocks.dataForKey(Data("Key 2")))

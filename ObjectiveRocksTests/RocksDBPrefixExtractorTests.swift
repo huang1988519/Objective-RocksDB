@@ -62,8 +62,8 @@ class RocksDBPrefixExtractorTests : RocksDBTests {
 	func testSwift_PrefixExtractor_FixedLength_CustomComparator() {
 		// 1001 < 9910 < 2011 < 3412 ...
 		let cmp = RocksDBComparator(name: "cmp") { (key1, key2) -> Int32 in
-			var sub1: NSString = key1.substringFromIndex(2) as NSString
-			var sub2: NSString = key2.substringFromIndex(2) as NSString
+			let sub1: NSString = key1.substringFromIndex(2) as NSString
+			let sub2: NSString = key2.substringFromIndex(2) as NSString
 
 			let res = sub1.compare(sub2 as String)
 			switch res {

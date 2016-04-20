@@ -19,11 +19,17 @@ class RocksDBCheckpointTests : RocksDBTests {
 
 		let checkpoint = RocksDBCheckpoint(database: rocks)
 
-		checkpoint.createCheckpointAtPath(checkpointPath1, error: nil)
+		do {
+			try checkpoint.createCheckpointAtPath(checkpointPath1)
+		} catch _ {
+		}
 
 		rocks.setData(Data("value 2"), forKey: Data("key 2"))
 
-		checkpoint.createCheckpointAtPath(checkpointPath2, error: nil)
+		do {
+			try checkpoint.createCheckpointAtPath(checkpointPath2)
+		} catch _ {
+		}
 
 		rocks.close()
 

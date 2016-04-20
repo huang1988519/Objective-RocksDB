@@ -34,7 +34,7 @@ class RocksDBMergeOperatorTests : RocksDBTests {
 		value = 5
 		rocks.mergeData(NumData(value), forKey: Data("key 1"))
 
-		var res: UInt64 = Val(rocks.dataForKey(Data("key 1")))
+		let res: UInt64 = Val(rocks.dataForKey(Data("key 1")))
 
 		XCTAssertTrue(res == 6);
 	}
@@ -76,7 +76,7 @@ class RocksDBMergeOperatorTests : RocksDBTests {
 		rocks.mergeObject(NSNumber(float: 200.125), forKey: "key 1")
 
 		let result: Float = rocks.objectForKey("key 1").floatValue
-		XCTAssertEqualWithAccuracy(result, Float(300.666), Float(0.0001))
+		XCTAssertEqualWithAccuracy(result, Float(300.666), accuracy: Float(0.0001))
 	}
 
 	func testSwift_AssociativeMergeOperator_DictionaryPut_Encoded() {
@@ -127,7 +127,7 @@ class RocksDBMergeOperatorTests : RocksDBTests {
 			fullMergeBlock: {
 				(key, existing, operands) -> NSMutableDictionary! in
 
-				var dict: NSMutableDictionary = existing as! NSMutableDictionary
+				let dict: NSMutableDictionary = existing as! NSMutableDictionary
 				for op in operands as NSArray {
 					let comp: NSArray = op.componentsSeparatedByString(":")
 					let action: NSString = comp[1] as! NSString

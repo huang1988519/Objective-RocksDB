@@ -49,7 +49,7 @@ class RocksDBSnapshotTests : RocksDBTests {
 		rocks.deleteDataForKey(Data("key 1"))
 		rocks.setData(Data("value 4"), forKey: Data("key 4"))
 
-		var actual: NSMutableArray = []
+		let actual: NSMutableArray = []
 		var iterator = snapshot.iterator()
 		iterator.enumerateKeysUsingBlock { (key, stop) -> Void in
 			actual.addObject(Str(key as! NSData))
